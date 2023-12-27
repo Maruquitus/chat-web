@@ -18,10 +18,29 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: white;
+}
+
+@font-face {
+  font-family: Regular;
+  src: url(/fontes/Quicksand-Regular.ttf);
+}
+
+@font-face {
+  font-family: Medium;
+  src: url(/fontes/Quicksand-Medium.ttf);
+}
+
+@font-face {
+  font-family: Semibold;
+  src: url(/fontes/Quicksand-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: Bold;
+  src: url(/fontes/Quicksand-Bold.ttf);
+}
+
+* {
+  font-family: Medium;
 }
