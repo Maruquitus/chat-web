@@ -1,17 +1,17 @@
 # 💬 Chat-Web
 Projeto desenvolvido com o intuito de ser uma aplicação de chat na web, tem interação com um aplicativo de mesmo propósito.
 
-## 🛠️ Em progresso
-  
-## 🚀 Tecnologias utilizadas
-* [React](https://pt-br.react.dev)
-* [Next.js](https://nextjs.org/)
-* [Firebase](https://firebase.google.com/?hl=pt/)
-* [Tailwind CSS](https://tailwindui.com)
+## Learn More
 
-## 💻 Telas concluídas
-### Login
-![image](https://github.com/Maruquitus/chat-web/assets/58173530/64bb2b22-a2ab-444f-9984-2bd1c08cc3d4)
+To learn more about Next.js, take a look at the following resources:
 
-### Registro
-![image](https://github.com/Maruquitus/chat-web/assets/58173530/6ed246d9-2694-4553-867c-1442b6a0471b)
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
