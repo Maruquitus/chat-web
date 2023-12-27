@@ -47,7 +47,7 @@ export default function SignUp(props) {
   
     return (
       <main className='w-full h-full flex'>
-        <div className='sm:w-1/3 self-center p-4 grid mx-auto my-20 sm:ml-8'>
+        <div className='sm:w-1/3 self-center p-4 grid mx-auto mb-14 sm:ml-8'>
           <img className='w-1/4 block mx-auto' src='/icon.png'></img>
           <h1 className='text-black font-bold text-2xl text-center'>Seja bem vindo! Insira suas informações.</h1>
           <form className='space-y-3'>
@@ -56,7 +56,7 @@ export default function SignUp(props) {
             <Input id='confirmarSenha' título='Confirme sua senha' tipo='password'/>
             <div class="justify-center grid">
               <Button id='botão' action={() => realizarSignUp()} text='Cadastrar'/>
-              <span className="text-gray-500 text-center font-semibold">Já tem uma conta?
+              <span className="text-gray-500 text-center font-semibold mt-1">Já tem uma conta?
                 <Link className='ml-1' text='Faça login!' destination='/login'/>
               </span>
             </div>

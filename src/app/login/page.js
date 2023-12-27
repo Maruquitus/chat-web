@@ -41,7 +41,7 @@ export default function Login(props) {
   
     return (
       <main className='w-full h-full flex'>
-        <div className='sm:w-1/3 self-center p-4 grid mx-auto my-20 sm:ml-8'>
+        <div className='sm:w-1/3 self-center p-4 grid mx-auto mb-32 sm:ml-8'>
           <img className='w-1/4 block mx-auto' src='/icon.png'></img>
           <h1 className='text-black font-bold text-2xl text-center'>Olá! Entre na sua conta.</h1>
           <form className='space-y-3'>
