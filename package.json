@@ -9,19 +9,35 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@babel/helper-module-imports": "^7.22.15",
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-brands-svg-icons": "^6.5.1",
+    "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "^0.2.0",
+    "babel-plugin-macros": "^3.1.0",
     "firebase": "^10.7.1",
     "firebase-admin": "^12.0.0",
     "net": "^1.0.2",
-    "next": "14.0.4",
+    "next": "^14.0.4",
     "react": "^18",
     "react-dom": "^18",
     "react-firebase-hooks": "^5.1.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.23.6",
+    "@babel/preset-env": "^7.23.6",
+    "@babel/preset-react": "^7.23.3",
+    "@swc/core": "^1.3.101",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
     "postcss": "^8",
     "tailwindcss": "^3.3.0"
+  },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
   }
 }

@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      boxShadowColor: {
+        'custom': '#2221'
+      },
       fontFamily: {
         'regular': 'Regular',
         'semibold': 'Semibold',
