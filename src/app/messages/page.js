@@ -188,7 +188,7 @@ export default function Messages(props) {
                   let [chatName, chatPicture, unseen] = processChat(c);
 
                   return (
-                    <div onClick={() => setChat(c)} className="cursor-pointer">
+                    <div key={c} onClick={() => setChat(c)} className="cursor-pointer">
                       <Chat
                         unseen={unseen}
                         selected={c == selectedChat}
