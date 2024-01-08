@@ -59,6 +59,7 @@ export default function Messages(props) {
   }
 
   function loadData() {
+    if (!user) return null
     //Informações dos usuários
     const usersRef = ref(db, "Users/");
     get(usersRef).then((snapshot) => {
@@ -112,9 +113,9 @@ export default function Messages(props) {
     );
   }
 
-  let chatPicture, chatName, chatParticipants, chatIsGroup;
+  let chatPicture, chatName, chatParticipants, chatIsGroup, unseen;
   if (selectedChat) {
-    [chatName, chatPicture] = processChat(selectedChat);
+    [chatName, chatPicture, unseen] = processChat(selectedChat);
     chatIsGroup = chats[selectedChat].isGroup;
     chatParticipants = [
       ...chats[selectedChat].participants.map((p) => users[p].name),
@@ -122,11 +123,28 @@ export default function Messages(props) {
   }
 
   function processChat(chat) {
-    let chatPicture, chatName, otherUser;
-    otherUser = users[chats[chat].participants.filter((u) => u != user.uid)[0]];
-    chatPicture = chats[chat].isGroup ? chats[chat].photo : otherUser.pfp;
-    chatName = chats[chat].isGroup ? chats[chat].name : otherUser.name;
-    return [chatName, chatPicture];
+    let chatPicture, chatName, otherUser, unseen;
+    if (user) {
+      otherUser = users[chats[chat].participants.filter((u) => u != user.uid)[0]];
+      chatPicture = chats[chat].isGroup ? chats[chat].photo : otherUser.pfp;
+      chatName = chats[chat].isGroup ? chats[chat].name : otherUser.name;
+
+      let messages = chats[chat].messages;
+      if (messages) {
+        unseen = Object.keys(messages).filter((m) => !messages[m].seenBy[user.uid] && user.uid != messages[m].sender).length
+      }
+    }
+    
+
+    return [chatName, chatPicture, unseen];
+  }
+
+  if (user == null) {
+    return (
+      <div>
+
+      </div>
+    );
   }
 
   //Renderizar página
@@ -164,14 +182,15 @@ export default function Messages(props) {
                     sortedMessages = messages ? Object.keys(messages) : [];
                     sortedMessages.sort((x) => -parseInt(x));
                     time = sortedMessages[0];
-                    lastMessage = messages[sortedMessages[0]].msg;
+                    if (messages[sortedMessages[0]]) lastMessage = messages[sortedMessages[0]].msg;
                   }
 
-                  let [chatName, chatPicture] = processChat(c);
+                  let [chatName, chatPicture, unseen] = processChat(c);
 
                   return (
                     <div onClick={() => setChat(c)} className="cursor-pointer">
                       <Chat
+                        unseen={unseen}
                         selected={c == selectedChat}
                         time={time}
                         photo={chatPicture}
@@ -260,7 +279,7 @@ export default function Messages(props) {
         >
           <div
             id="modal"
-            className="absolute border border-zinc-100 m-auto bg-white w-1/2 h-auto p-10 top-14 left-1/4 shadow-custom shadow-lg rounded-2xl"
+            className="absolute border border-zinc-100 m-auto bg-white sm:w-1/2 w-full h-auto overflow-hidden p-10 top-14 sm:left-1/4 shadow-custom shadow-lg rounded-2xl"
           >
             <h1 className="text-black font-bold text-3xl text-center">
               Este é seu perfil!
@@ -279,7 +298,7 @@ export default function Messages(props) {
                 />
               </div>
               <h3 className="text-center text-black text-2xl mt-2">
-                Marcos Sousa
+                {users[user.uid].name}
               </h3>
             </>
             )

@@ -10,6 +10,9 @@ module.exports = {
       boxShadowColor: {
         'custom': '#2221'
       },
+      fontSize: {
+        'small': '0.9rem'
+      },
       fontFamily: {
         'regular': 'Regular',
         'semibold': 'Semibold',

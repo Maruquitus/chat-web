@@ -19,10 +19,15 @@ export function MessageInput(props) {
         console.log(dados);
         let messages = dados.messages;
         let time = Date.now();
+        let seenBy = {};
+        dados.participants.map((p) => {
+          if (p != props.user) seenBy[p] = false;
+        })
         if (!messages) messages = {};
         messages[time] = {
           msg: message,
           sender: props.user,
+          seenBy: seenBy
         };
         dados.messages = messages;
         input.value = "";
@@ -32,8 +37,8 @@ export function MessageInput(props) {
   }
 
   return (
-    <>
-      <div className="bg-sky-100 w-2/3 h-14 absolute bottom-0 right-0 shadow-md flex-column">
+    <div className="flex flew-row">
+      <div className="bg-sky-100 w-2/3 h-14 absolute bottom-0 right-0 shadow-md flex flex-row">
         <input
           onKeyDown={(e) => {
             if (e.key == "Enter") {
@@ -42,15 +47,15 @@ export function MessageInput(props) {
           }}
           id="messageInput"
           placeholder="Sua mensagem aqui"
-          className="outline-0 h-10 mt-2 pl-2 ml-3.5 text-black bg-white rounded-md shadow-sm w-11/12 inline-flex"
+          className="outline-0 h-10 mt-2 pl-2 ml-3.5 text-black bg-white rounded-md shadow-sm w-full inline-flex"
         ></input>
         <button
           onClick={() => sendMessage()}
-          className="bg-secondary-color rounded-full h-9 w-9 cursor-pointer inline-flex ml-2 absolute top-3"
+          className="bg-secondary-color rounded-full h-9 aspect-square cursor-pointer inline-flex ml-2 mt-2.5 mr-3"
         >
           <i className="fa-solid fa-paper-plane text-white scale-125 ml-2 mt-2.5"></i>
         </button>
       </div>
-    </>
+    </div>
   );
 }
