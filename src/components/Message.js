@@ -62,7 +62,7 @@ export function Message(props) {
           )}
         >
           <h2
-            className={`${props.seen != undefined ? "pr-12" : "pr-9"} inline-b`}
+            className={`${props.seen != undefined ? "pr-12" : "pr-9"} select-text inline-b`}
           >
             {props.msg}
           </h2>

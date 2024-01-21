@@ -4,6 +4,7 @@ export const erros = {
     "auth/invalid-credential": "Credenciais inválidas!",
     "auth/network-request-failed": "Erro de conexão com a internet.",
     "auth/weak-password": "Insira uma senha mais forte!",
-    "auth/email-already-in-use": "O e-mail selecionado já existe!",
+    "auth/email-already-in-use": "O e-mail selecionado já está em uso!",
     "senhasdiferentes":"Suas senhas não estão iguais!",
+    "usuarioexiste": 'O nome de usuário selecionado já existe!',
   };

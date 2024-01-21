@@ -13,11 +13,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-br">
       <head>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
       <link rel="icon" href="/favicon.ico" type="image/x-icon"/>
       
       </head>
-      <body className={inter.className + ' flex w-screen h-screen'}>{children}
-      <Script src="https://kit.fontawesome.com/11bac70e77.js" crossOrigin="anonymous"></Script></body>
+      <body className={inter.className + ' flex w-screen h-screen select-none'}>{children}
+      <Script strategy='lazyOnload' src="https://kit.fontawesome.com/11bac70e77.js" as='script' crossOrigin="anonymous"></Script></body>
     </html>
   )
 }
