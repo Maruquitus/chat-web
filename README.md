@@ -1,6 +1,6 @@
 # 💬 Chat-Web
 Projeto desenvolvido com o intuito de ser uma aplicação responsiva de chat na web.
-Deploy através do [Vercel](https://vercel.com) disponível em https://chat-web-one-omega.vercel.app/
+Deploy através do [Vercel](https://vercel.com), disponível em https://chat-web-one-omega.vercel.app/
 
 ## 🛠️ Em progresso
   
