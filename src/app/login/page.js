@@ -22,7 +22,10 @@ export default function Login() {
       document.querySelector('form').addEventListener('submit', function(event) { 
         event.preventDefault();
     })}, []);
-  
+    
+    /**
+     * Lê os valores do formulário (email, senha) e realiza o login do usuário com o Firebase.
+     */
     const realizarLogin = async () => {
       let email = document.getElementById('email').value;
       let senha = document.getElementById('senha').value;

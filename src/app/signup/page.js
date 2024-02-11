@@ -24,6 +24,11 @@ export default function SignUp() {
     });
   }, []);
 
+  /**
+   * Checa a validade das inputs colocadas no formulário: email, senha e confirmarSenha.
+   * @see checkUsernameAndEmailAvailable(name,email) Verifica se o username ou email já existe na base de dados.
+   * @returns {bool}
+   */
   async function checkInputValidity() {
     name = document.getElementById("name").value;
     setName(name);
@@ -58,6 +63,11 @@ export default function SignUp() {
     }
   }
 
+  /**
+   * Checa a disponibilidade do nome de usuário e email.
+   * @param {string} username Nome do usuário.
+   * @param {string} email Email do usuário.
+   */
   async function checkUsernameAndEmailAvailable(username, email) {
     //Carregar informações dos usuários
     const usersRef = ref(db, "Users/");
@@ -88,6 +98,11 @@ export default function SignUp() {
     return result;
   }
 
+  /**
+ * Atualiza os dados do registro na BD.
+ * @param {object} dados - Dados do novo usuário.
+ * @param {string} url - URL da foto de perfil.
+ */
   const finishSignUp = async (dados, url) => {
     //Atualizar dados na bd
     const user = dados.user;
@@ -104,6 +119,11 @@ export default function SignUp() {
     botão.style.cursor = "pointer";
     alert("Registro feito com sucesso!");
   };
+
+  /**
+   * Pega as informações do formulário e cria o usuário no Firebase.
+   * @event Button#click
+   */
 
   const signUp = async () => {
     //Verificação das inputs
@@ -153,6 +173,10 @@ export default function SignUp() {
     }
   };
 
+
+  /**
+   * Abre o diálogo de escolher arquivo.
+   */
   function getPhoto() {
     var input = document.createElement("input");
     input.type = "file";

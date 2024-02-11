@@ -14,6 +14,13 @@ function generateUid () {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
 };
 
+/**
+* Cria um novo chat.
+* @param {object} chats Chats do usuário.
+* @param {string} user1 UID do usuário que criou o chat.
+* @param {string} user2 UID do outro participante do chat.
+* @return {string} UID do chat criado.
+*/
 async function newChat(chats, user1, user2) {
   let foundChat;
   if (chats) {
@@ -50,6 +57,9 @@ export default function Messages() {
   const [newChatVisible, setNewChatVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
+  /**
+  * Função responsável pela alteração da foto do usuário.
+  */
   async function getPhoto() {
     var input = document.createElement("input");
     input.type = "file";
@@ -85,6 +95,10 @@ export default function Messages() {
     input.click();
   }
 
+  /**
+  * Atualiza a base de dados com a nova foto de perfil.
+  * @param {string} url Url da nova foto.
+  */
   async function updateBdPfp(url) {
     const pfp =
       url ||
@@ -102,16 +116,25 @@ export default function Messages() {
     setTimeout(closeModal, 700);
   }
 
+  /**
+  * Fecha o modal.
+  */
   function closeModal() {
     setModalVisible(false);
   }
 
+  /**
+  * Fecha a janela de nova conversa.
+  */
   function closeNewChat() {
     let div = document.getElementById("newChat");
     div.className = div.className.replace("InLeft", "OutLeft");
     setTimeout(() => setNewChatVisible(false), 800);
   }
 
+  /**
+  * Carrega os dados da BD.
+  */
   function loadData() {
     if (!user) return null;
     //Informações dos usuários
@@ -193,6 +216,11 @@ export default function Messages() {
     }
   }
 
+    /**
+   * Processa os dados de um chat.
+   * @param {string} chat - Id do chat a ser processado
+   * @return {[string, string, number]} - Retorna um array com três elementos: chatName (string), chatPicture (string), e unseen (number)
+   */
   function processChat(chat) {
     let chatPicture, chatName, otherUser, unseen;
 
@@ -311,6 +339,7 @@ export default function Messages() {
             {/* Lista de conversas */}
             <div className="mt-14 w-full h-11/12 overflow-x-visible pt-1 z-20">
               {chats &&
+                //Processa as informações para exibir a lista de conversas.
                 Object.keys(chats).map((c) => {
                   let data = chats[c];
                   let messages = data.messages || null;
