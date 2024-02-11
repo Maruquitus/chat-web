@@ -19,7 +19,7 @@ function calculateDays(date1, date2) {
 /**
  * Processa uma data para gerar o texto do header.
  * @param {date} date Data
- * @returns {string} text Hoje / Dia da semana / Data completa
+ * @returns {string} Hoje / Dia da semana / Data completa
  */
 export function processDate(date) {
   const daysOfWeek = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];

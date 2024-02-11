@@ -10,6 +10,10 @@ import { IconButton } from "@/components/IconButton.js";
 import { Loader } from "@/components/Loader.js";
 import { User } from "@/components/User.js";
 
+/**
+ * Gera um UID com base no horário atual.
+ * @returns {string} UID
+ */
 function generateUid () {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
 };
@@ -218,8 +222,8 @@ export default function Messages() {
 
     /**
    * Processa os dados de um chat.
-   * @param {string} chat - Id do chat a ser processado
-   * @return {[string, string, number]} - Retorna um array com três elementos: chatName (string), chatPicture (string), e unseen (number)
+   * @param {string} chat Id do chat a ser processado
+   * @return {[string, string, number]} Retorna um array com três elementos: chatName (string), chatPicture (string), e unseen (number)
    */
   function processChat(chat) {
     let chatPicture, chatName, otherUser, unseen;

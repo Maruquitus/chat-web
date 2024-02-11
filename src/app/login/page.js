@@ -38,7 +38,7 @@ export default function Login() {
         //Realizar login do usuário no Firebase
         auth
           .signInWithEmailAndPassword(email, senha)
-          .then(async (data) => {
+          .then(async () => {
             setErro('');
             botão.style.cursor = 'pointer';
             console.log(auth.currentUser)

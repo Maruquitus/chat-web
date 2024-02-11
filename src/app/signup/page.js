@@ -27,7 +27,8 @@ export default function SignUp() {
   /**
    * Checa a validade das inputs colocadas no formulário: email, senha e confirmarSenha.
    * @see checkUsernameAndEmailAvailable(name,email) Verifica se o username ou email já existe na base de dados.
-   * @returns {bool}
+   * Também checa algumas regras básicas de segurança, como a quantidade de caracteres da senha.
+   * @returns {bool} Validade das inputs
    */
   async function checkInputValidity() {
     name = document.getElementById("name").value;
@@ -100,8 +101,8 @@ export default function SignUp() {
 
   /**
  * Atualiza os dados do registro na BD.
- * @param {object} dados - Dados do novo usuário.
- * @param {string} url - URL da foto de perfil.
+ * @param {object} dados Dados do novo usuário.
+ * @param {string} url URL da foto de perfil.
  */
   const finishSignUp = async (dados, url) => {
     //Atualizar dados na bd
