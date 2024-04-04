@@ -14,27 +14,31 @@ import { User } from "@/components/User.js";
  * Gera um UID com base no horário atual.
  * @returns {string} UID
  */
-function generateUid () {
+function generateUid() {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
-};
+}
 
 /**
-* Cria um novo chat.
-* @param {object} chats Chats do usuário.
-* @param {string} user1 UID do usuário que criou o chat.
-* @param {string} user2 UID do outro participante do chat.
-* @return {string} UID do chat criado.
-*/
+ * Cria um novo chat.
+ * @param {object} chats Chats do usuário.
+ * @param {string} user1 UID do usuário que criou o chat.
+ * @param {string} user2 UID do outro participante do chat.
+ * @return {string} UID do chat criado.
+ */
 async function newChat(chats, user1, user2) {
   let foundChat;
   if (chats) {
     Object.keys(chats).map((chat) => {
-    if (chats[chat].participants.includes(user1) && chats[chat].participants.includes(user2) && !chats[chat].isGroup) {
-      foundChat = chat;
-      return null;
-    }
-  })
-}
+      if (
+        chats[chat].participants.includes(user1) &&
+        chats[chat].participants.includes(user2) &&
+        !chats[chat].isGroup
+      ) {
+        foundChat = chat;
+        return null;
+      }
+    });
+  }
   if (foundChat) return foundChat;
 
   const uid = generateUid();
@@ -62,8 +66,8 @@ export default function Messages() {
   const [modalVisible, setModalVisible] = useState(false);
 
   /**
-  * Função responsável pela alteração da foto do usuário.
-  */
+   * Função responsável pela alteração da foto do usuário.
+   */
   async function getPhoto() {
     var input = document.createElement("input");
     input.type = "file";
@@ -100,9 +104,9 @@ export default function Messages() {
   }
 
   /**
-  * Atualiza a base de dados com a nova foto de perfil.
-  * @param {string} url Url da nova foto.
-  */
+   * Atualiza a base de dados com a nova foto de perfil.
+   * @param {string} url Url da nova foto.
+   */
   async function updateBdPfp(url) {
     const pfp =
       url ||
@@ -121,15 +125,15 @@ export default function Messages() {
   }
 
   /**
-  * Fecha o modal.
-  */
+   * Fecha o modal.
+   */
   function closeModal() {
     setModalVisible(false);
   }
 
   /**
-  * Fecha a janela de nova conversa.
-  */
+   * Fecha a janela de nova conversa.
+   */
   function closeNewChat() {
     let div = document.getElementById("newChat");
     div.className = div.className.replace("InLeft", "OutLeft");
@@ -137,8 +141,8 @@ export default function Messages() {
   }
 
   /**
-  * Carrega os dados da BD.
-  */
+   * Carrega os dados da BD.
+   */
   function loadData() {
     if (!user) return null;
     //Informações dos usuários
@@ -160,17 +164,18 @@ export default function Messages() {
         const dados = snapshot.val();
 
         const chats = dados || [];
-        let userChats = Object.keys(chats).filter((chat) =>
-          Object.values(chats[chat].participants).includes(user.uid)
+        let userChats = Object.keys(chats).filter(
+          (chat) =>
+            Object.values(chats[chat].participants).includes(user.uid) &&
+            chats[chat].messages
         );
 
         userChats.sort((chatA, chatB) => {
           const lastMessageA = Object.keys(chats[chatA].messages).slice(-1)[0];
           const lastMessageB = Object.keys(chats[chatB].messages).slice(-1)[0];
-        
+
           return parseInt(lastMessageB) - parseInt(lastMessageA);
         });
-        
 
         let outputChats = {};
         userChats.forEach((c) => {
@@ -207,8 +212,6 @@ export default function Messages() {
     );
   }
 
-  
-
   let chatPicture, chatName, chatParticipants, chatIsGroup, unseen;
   if (selectedChat && chats) {
     if (chats[selectedChat]) {
@@ -220,7 +223,7 @@ export default function Messages() {
     }
   }
 
-    /**
+  /**
    * Processa os dados de um chat.
    * @param {string} chat Id do chat a ser processado
    * @return {[string, string, number]} Retorna um array com três elementos: chatName (string), chatPicture (string), e unseen (number)
@@ -229,7 +232,8 @@ export default function Messages() {
     let chatPicture, chatName, otherUser, unseen;
 
     if (user && chats[chat]) {
-      otherUser = users[chats[chat].participants.filter((u) => u != user.uid)[0]];
+      otherUser =
+        users[chats[chat].participants.filter((u) => u != user.uid)[0]];
       chatPicture = chats[chat].isGroup ? chats[chat].photo : otherUser.pfp;
       chatName = chats[chat].isGroup ? chats[chat].name : otherUser.name;
 
@@ -239,7 +243,6 @@ export default function Messages() {
           (m) => !messages[m].seenBy[user.uid] && user.uid != messages[m].sender
         ).length;
       }
-
     }
 
     return [chatName, chatPicture, unseen];
@@ -283,16 +286,16 @@ export default function Messages() {
                 if (uid == user.uid) return null;
                 const userData = users[uid];
                 return (
-                  <div key={uid} onClick={async () => {
-                    let chatId = await newChat(chats, uid, user.uid);
-                    await loadData();
-                    closeNewChat();
-                    setChat(chatId);
-                  }}>
-                    <User
-                      name={userData.name}
-                      photo={userData.pfp}
-                    />
+                  <div
+                    key={uid}
+                    onClick={async () => {
+                      let chatId = await newChat(chats, uid, user.uid);
+                      await loadData();
+                      closeNewChat();
+                      setChat(chatId);
+                    }}
+                  >
+                    <User name={userData.name} photo={userData.pfp} />
                   </div>
                 );
               })}
@@ -384,7 +387,7 @@ export default function Messages() {
           <div className="w-2/3 h-full bg-slate-100 flex">
             {/* Header à direita */}
             <header className="bg-gray-100 z-30 h-14 absolute top-0 right-0 w-2/3 shadow-md shadow-custom">
-              {(selectedChat && chats[selectedChat]) && (
+              {selectedChat && chats[selectedChat] && (
                 <div className="w-full h-full absolute">
                   <div className="flex">
                     <img
@@ -429,7 +432,7 @@ export default function Messages() {
             )}
 
             {/* Renderizar chat aberto*/}
-            {(selectedChat && chats[selectedChat]) && (
+            {selectedChat && chats[selectedChat] && (
               <div className="w-full flex mt-14">
                 <OpenChat
                   isGroup={chatIsGroup}
