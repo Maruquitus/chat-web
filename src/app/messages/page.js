@@ -164,17 +164,23 @@ export default function Messages() {
         const dados = snapshot.val();
 
         const chats = dados || [];
-        let userChats = Object.keys(chats).filter(
-          (chat) =>
-            Object.values(chats[chat].participants).includes(user.uid) &&
-            chats[chat].messages
+        let userChats = Object.keys(chats).filter((chat) =>
+          Object.values(chats[chat].participants).includes(user.uid)
         );
 
         userChats.sort((chatA, chatB) => {
-          const lastMessageA = Object.keys(chats[chatA].messages).slice(-1)[0];
-          const lastMessageB = Object.keys(chats[chatB].messages).slice(-1)[0];
+          if (chats[chatA].messages && chats[chatB].messages) {
+            const lastMessageA = Object.keys(chats[chatA].messages).slice(
+              -1
+            )[0];
+            const lastMessageB = Object.keys(chats[chatB].messages).slice(
+              -1
+            )[0];
 
-          return parseInt(lastMessageB) - parseInt(lastMessageA);
+            return parseInt(lastMessageB) - parseInt(lastMessageA);
+          } else {
+            return 0;
+          }
         });
 
         let outputChats = {};
@@ -308,7 +314,7 @@ export default function Messages() {
                 <img
                   onClick={() => setModalVisible(true)}
                   src={users[user.uid].pfp}
-                  className="h-10 w-10 rounded-full ml-4 my-auto cursor-pointer hover:scale-105 duration-300 inline-flex mt-2"
+                  className="h-10 w-10 aspect-square object-cover rounded-full ml-4 my-auto cursor-pointer hover:scale-105 duration-300 inline-flex mt-2"
                 />
                 <h1 className="text-black mt-4 ml-2 font-medium truncate w-5/12 md:w-full">
                   {users[user.uid].name}
@@ -344,7 +350,7 @@ export default function Messages() {
             </header>
 
             {/* Lista de conversas */}
-            <div className="mt-14 w-full h-11/12 overflow-x-visible pt-1 z-20">
+            <div className="mt-14 w-full h-11/12 overflow-x-hidden pt-1 z-20">
               {chats &&
                 //Processa as informações para exibir a lista de conversas.
                 Object.keys(chats).map((c) => {
@@ -391,7 +397,7 @@ export default function Messages() {
                 <div className="w-full h-full absolute">
                   <div className="flex">
                     <img
-                      className="rounded-full w-10 h-10 mt-2 ml-2"
+                      className="rounded-full aspect-square object-cover w-10 h-10 mt-2 ml-2"
                       src={chatPicture}
                     />
                     <div className="flex-col flex h-full ml-2 mb-2 mt-1.5">
@@ -482,7 +488,10 @@ export default function Messages() {
             (
             <>
               <div className="w-40 h-40 rounded-full overflow-hidden mx-auto mt-3 shadow-custom shadow-md">
-                <img src={users[user.uid].pfp} />
+                <img
+                  className="aspect-square object-cover"
+                  src={users[user.uid].pfp}
+                />
               </div>
               <h3 className="text-center text-black text-2xl mt-2">
                 {users[user.uid].name}
